@@ -1,15 +1,16 @@
 import React from "react";
-// import ToDo from "./components/ToDo/ToDo";
-// import { Provider } from "react-redux";
-// import store from "./store/store";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import Navbar from "./components/Navbar/Navbar";
 import "./App.css";
 
 function App() {
   return (
     <React.Fragment>
-      {/* <Provider store={store}>
-        <ToDo />
-      </Provider> */}
+      <Router>
+        <Navbar />
+        <AppRoutes />
+      </Router>
     </React.Fragment>
   );
 }
