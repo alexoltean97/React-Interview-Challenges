@@ -7,10 +7,27 @@
   text-align: center;
 }
 
+ul{
+  margin: 0;
+  padding: 0;
+}
 
 .nav__list li{
   margin: 0 5px;
   display: inline;
+}
+
+.d-none{
+  display: none;
+}
+
+.d-block {
+  display: block;
+}
+
+.nav-burger{
+
+  cursor: pointer;
 }
 
 /*End Challenge 2 css */

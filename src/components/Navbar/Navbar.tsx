@@ -1,43 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
-import "./Navbar.css";
 
-// const [showMenu, setShowMenu] = useState(false);
+const Navbar: React.FC = () => {
+  const [showMenu, setShowMenu] = useState<boolean>(true);
+  const isMobile = useMediaQuery({ maxWidth: 990 });
 
-const Navbar = () => {
- return (
-   <header className="header">
-     <nav className="nav container">
+  const toggleMenu = (): void => {
+    setShowMenu(!showMenu);
+  };
 
-       <div
-         className={"nav__menu"}
-         id="nav-menu"
-       >
-         <ul className="nav__list">
-           <li className="nav__item">
-             <NavLink to="/" className="nav__link">
-               Home
-             </NavLink>
-           </li>
-           <li className="nav__item">
-             <NavLink to="/todo" className="nav__link">
-               To do application
-             </NavLink>
-           </li>
-          
-         </ul>
-         <div className="nav__close" id="nav-close">
-           <IoClose />
-         </div>
-       </div>
+  useEffect(() => {
+    setShowMenu(!isMobile);
+  }, [isMobile]);
 
-       <div className="nav__toggle" id="nav-toggle">
-         <IoMenu />
-       </div>
-     </nav>
-   </header>
- );
+  return (
+    <header className="header">
+      <nav className="nav container">
+        {isMobile && (
+          <div
+            className={`nav-burger ${showMenu ? "d-none" : "d-block"}`}
+            id="nav-toggle"
+          >
+            <IoMenu onClick={toggleMenu} />
+          </div>
+        )}
+
+        {isMobile && (
+          <div
+            className={`nav__close  ${!showMenu ? "d-none" : "d-block"}`}
+            id="nav-close"
+          >
+            <IoClose onClick={toggleMenu} />
+          </div>
+        )}
+
+        <div
+          className={`nav-menu ${showMenu ? "d-block" : "d-none"}`}
+          id="nav-menu"
+        >
+          <ul className="nav__list">
+            <li className="nav__item">
+              <NavLink to="/" className="nav__link">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav__item">
+              <NavLink to="/todo" className="nav__link">
+                To do application
+              </NavLink>
+            </li>
+
+            <li className="nav__item">
+              <NavLink to="/table" className="nav__link">
+                Api Table
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  );
 };
 
 export default Navbar;
